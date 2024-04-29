@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html ng-app="batteryApp">
+<head>
+  <title>Battery Installation Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:disabled {
+      background-color: #cccccc;
+      cursor: not-allowed;
+    }
+    .submitted-details {
+      margin-top: 20px;
+      border-top: 1px solid #ccc;
+      padding-top: 20px;
+    }
+    .submitted-details h2 {
+      margin-top: 0;
+    }
+    .submitted-details p {
+      margin: 5px 0;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+  <center>
+
+    <h3>Battery Installation Form</h3>
+  </center>
+
+<div class="container" ng-controller="BatteryInstallationController">
+  <form name="form" ng-submit="submitForm()">
+    <div class="form-group">
+      <label>Serial Number:</label>
+      <input type="text" ng-model="battery.serialNumber" required>
+    </div>
+    <div class="form-group">
+      <label>Type:</label>
+      <select ng-model="battery.type" required>
+        <option value="">Select Type</option>
+        <option value="Lithium-ion">Lithium-ion</option>
+        <option value="Lead-acid">Lead-acid</option>
+        <option value="Nickel-metal hydride">Nickel-metal hydride</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Installation Date:</label>
+      <input type="date" ng-model="battery.installationDate" required>
+    </div>
+    <div class="form-group">
+      <label>Location of Installation:</label>
+      <input type="text" ng-model="battery.installationLocation" required>
+    </div>
+    <button type="submit" ng-disabled="form.$invalid">Submit</button>
+  </form>
+
+  <div class="submitted-details" ng-show="submitted">
+    <h2>Installation Details</h2>
+    <p><strong>Serial Number:</strong> {{ submittedDetails.serialNumber }}</p>
+    <p><strong>Type:</strong> {{ submittedDetails.type }}</p>
+    <p><strong>Installation Date:</strong> {{ submittedDetails.installationDate | date }}</p>
+    <p><strong>Location of Installation:</strong> {{ submittedDetails.installationLocation }}</p>
+  </div>
+</div>
+
+<script>
+  var app = angular.module('batteryApp', []);
+
+  app.controller('BatteryInstallationController', function($scope) {
+    $scope.battery = {};
+    $scope.submitted = false;
+
+    $scope.submitForm = function() {
+      if ($scope.form.$valid) {
+        // Submit the form data to backend or perform other actions
+        console.log($scope.battery);
+        $scope.submittedDetails = angular.copy($scope.battery);
+        $scope.submitted = true;
+        $scope.battery = {}; // Clear the form fields
+        $scope.form.$setPristine(); // Reset the form state
+      }
+    };
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+           
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Library Management System</h2>
+    <center>
+
+        <form id="libraryForm">
+            <label for="bookTitle">Book Title:</label>
+            <input type="text" id="bookTitle" name="bookTitle" required>
+            <span class="error" id="titleError"></span><br>
+    
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+            <span class="error" id="authorError"></span><br>
+    
+            <label for="isbn">ISBN:</label>
+            <input type="text" id="isbn" name="isbn" required>
+            <span class="error" id="isbnError"></span><br>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" required>
+                <p><span id="email_error" style="color: rgb(252, 244, 28);">Please enter you email</span></p>
+              </div>
+              <div class="form-group">
+                <label for="email">Phone no</label>
+                <input type="text" id="phone" name="phone" required>
+                <p><span id="phone_error" style="color: rgb(252, 244, 28);">Please enter your phone number</span></p>
+              </div>
+    
+            <input type="submit" value="Add Book">
+        </form>
+    </center>
+
+
+    <script>
+        $(document).ready(function() {
+            $("#libraryForm").submit(function(event) {
+                // Prevent form submission
+                event.preventDefault();
+
+                // Clear previous error messages
+                $(".error").text("");
+
+                // Perform form validation
+                let isValid = true;
+
+                // Validate Book Title
+                let bookTitle = $("#bookTitle").val();
+                if (bookTitle === "") {
+                    $("#titleError").text("Please enter a book title.");
+                    isValid = false;
+                }
+
+                // Validate Author
+                let author = $("#author").val();
+                if (author === "") {
+                    $("#authorError").text("Please enter the author's name.");
+                    isValid = false;
+                }
+
+                // Validate ISBN
+                let isbn = $("#isbn").val();
+                if (isbn === "") {
+                    $("#isbnError").text("Please enter the ISBN.");
+                    isValid = false;
+                }
+
+                // If all validations pass, you can submit the form
+                if (isValid) {
+                    // Perform your form submission logic here
+                    console.log("Form submitted successfully!");
+                }
+
+                $(document).on("focusin","#phone",function(){
+                    $("#name_error").hide();
+                  })
+            
+                  $(document).on("focusout","#phone",function(){
+                    value=$("#phone").val()
+                    if(value.length != 10){
+            
+                        $("#phone_error").show();
+                    }else{
+                        $("#phone_error").hide();
+                    }
+                  })
+                  /*-----------------------------------------*/
+                  $(document).on("focusin","#email",function(){
+                    $("#email_error").hide();
+                  })
+            
+                  $(document).on("keyup","#email",function(){
+                    const emailRegex =/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.com$/;
+                    email=$("#email").val()
+                    if(!emailRegex.test(email)){
+            
+                        $("#email_error").show();
+                    }else{
+                        $("#email_error").hide();
+                    }
+                  })
+            });
+        });
+    </script>
+
+</body>
+</html>

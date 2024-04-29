@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battery Management System</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<style>
+    /* Add professional and creative styling */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url('background.jpg');
+        background-size: cover;
+        background-position: center;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    }
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+    }
+    .button:hover {
+        background-color: #45a049;
+    }
+    .button:active {
+        background-color: #367733;
+    }
+    #totalOrderPrice {
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Battery Management System</h1>
+
+    <!-- Add Battery Form -->
+    <form id="addBatteryForm">
+        <h2>Add Battery</h2>
+        <label for="batteryId">Battery ID:</label><br>
+        <input type="text" id="batteryId" name="batteryId"><br>
+        <label for="batteryName">Battery Name:</label><br>
+        <input type="text" id="batteryName" name="batteryName"><br>
+        <label for="batteryPrice">Battery Price:</label><br>
+        <input type="number" id="batteryPrice" name="batteryPrice"><br>
+        <label for="batteryStock">Initial Stock:</label><br>
+        <input type="number" id="batteryStock" name="batteryStock"><br><br>
+        <button type="button" class="button" onclick="batteryManagementSystem.addBattery()">Add Battery</button>
+    </form>
+
+    
+    <form id="updateStockForm">
+        <h2>Update Stock</h2>
+        <label for="updateBatteryId">Battery ID:</label><br>
+        <input type="text" id="updateBatteryId" name="updateBatteryId"><br>
+        <label for="updateQuantity">Quantity:</label><br>
+        <input type="number" id="updateQuantity" name="updateQuantity"><br><br>
+        <button type="button" class="button" onclick="batteryManagementSystem.updateStock()">Update Stock</button>
+    </form>
+
+   
+    <form id="placeOrderForm">
+        <h2>Place Order</h2>
+        <table id="orderItems">
+            <tr>
+                <th>Battery ID</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+        </table>
+        <button type="button" class="button" onclick="batteryManagementSystem.addOrderItem()">Add Item</button>
+        <button type="button" class="button" onclick="batteryManagementSystem.placeOrder()">Place Order</button>
+    </form>
+
+   
+    <h2>List Batteries</h2>
+    <table id="batteryList">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Stock</th>
+        </tr>
+    </table>
+
+  
+    <div id="totalOrderPrice"></div>
+</div>
+
+<!-- JavaScript file -->
+<script src="batteryManagementSystem.js"></script>
+
+</body>
+</html>

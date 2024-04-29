@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Battery Order Form</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Custom CSS -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function(){
+        var name="";
+        var quantity="";
+        var email="";
+      $(document).on("focusin","#fullName",function(){
+        $("#name_error").hide();
+        $("#namerule").hide();
+        
+      })
+
+      $(document).on("focusout","#fullName",function(){
+        $("#namerule").hide();
+        name=$("#fullName").val()
+        if(name.length < 3){
+
+            $("#namerule").show();
+        }else{
+            $("#namerule").hide();
+        }
+      })
+
+      /*-----------------------------------------*/
+      $(document).on("focusin","#quantity",function(){
+        $("#name_error").hide();
+      })
+
+      $(document).on("focusout","#quantity",function(){
+        quantity=$("#quantity").val()
+        if(quantity === ""){
+
+            $("#qerror").show();
+        }else{
+            $("#qerror").hide();
+        }
+      })
+      /*-----------------------------------------*/
+      $(document).on("focusin","#phone",function(){
+        $("#name_error").hide();
+      })
+
+      $(document).on("focusout","#phone",function(){
+        value=$("#phone").val()
+        if(value.length != 10){
+
+            $("#phone_error").show();
+        }else{
+            $("#phone_error").hide();
+        }
+      })
+      /*-----------------------------------------*/
+      $(document).on("focusin","#email",function(){
+        $("#email_error").hide();
+      })
+
+      $(document).on("keyup","#email",function(){
+        const emailRegex =/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.com$/;
+        email=$("#email").val()
+        if(!emailRegex.test(email)){
+
+            $("#email_error").show();
+        }else{
+            $("#email_error").hide();
+        }
+      })
+      
+    })
+</script>
+<style>
+  body{
+    background-image: url(q1.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .order-form{
+   
+      background: white;
+      background: linear-gradient(
+          to right bottom,
+          rgba(255, 255, 255, 0.4),
+          rgba(255, 255, 255, 0.2)
+      );
+      backdrop-filter: blur(1rem);
+      width: 60%;
+      height: 60%;
+      z-index: 1;
+     
+      justify-content: center;
+      align-items: center;
+      border-radius: 5rem;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+  }
+  
+</style>
+
+</head>
+<body>
+
+  <div class="container order">
+    <div class="order-form">
+      <h2 class="text-center mb-4" style="color: aliceblue;">Battery Order Form</h2>
+      <form action="loca">
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" required>
+          <p><span id="name_error" style="color: rgb(252, 244, 28);">Please enter your name</span><span id="namerule" style="color: rgb(252, 244, 28);">and must be greater then 3 letters</span></p>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" required>
+          <p><span id="email_error" style="color: rgb(252, 244, 28);">Please enter you email</span></p>
+        </div>
+        <div class="form-group">
+          <label for="email">Phone no</label>
+          <input type="text" id="phone" name="phone" required>
+          <p><span id="phone_error" style="color: rgb(252, 244, 28);">Please enter your phone number</span></p>
+        </div>
+        
+        <div class="form-group">
+          <label for="batteryType">Battery Type</label>
+          <select id="batteryType" name="batteryType" required>
+            <option value="standard">Standard</option>
+            <option value="premium">Premium</option>
+            <option value="heavy-duty">Heavy Duty</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Quantity</label>
+          <input type="number" id="quantity" name="quantity" min="1" required>
+          <p><span id="qerror" style="color:  rgb(252, 244, 28);">Please tell your quantity</span></p>
+        </div>
+        <center>
+          
+          <button type="button" >Place order</button>
+        </center>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
